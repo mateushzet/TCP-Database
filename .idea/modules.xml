@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TCP-Database.iml" filepath="$PROJECT_DIR$/TCP-Database.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KolokwiumTCP.iml" filepath="$PROJECT_DIR$/KolokwiumTCP.iml" />
     </modules>
   </component>
 </project>
