@@ -10,7 +10,6 @@ public class ServerTCP {
             String user = "root";
             String pwd = "password";
             Connection con = DriverManager.getConnection(url,user,pwd);
-            System.out.println(selectQuestion(con,1));
 
             String[] tempArgs = new String[1];
             tempArgs[0] = "4999";
@@ -31,7 +30,7 @@ public class ServerTCP {
             int i = 0;
             while (true) {
                 if(ServerTCPThread.connectedClients < MAX_CLIENT_CAPACITY) {
-                    ServerTCPThread thread = new ServerTCPThread(serverSocket.accept());
+                    ServerTCPThread thread = new ServerTCPThread(serverSocket.accept(),con);
                     i++;
                     ServerTCPThread.connectedClients++;
                     System.out.println("polaczono klienta nr: " + i);
@@ -79,40 +78,4 @@ public class ServerTCP {
         }
 
     }
-
-    static public void insertAnswer(Connection con){};
-
-    static public void insertResult(Connection con){};
-
-    static public int selectResult(Connection con, String imie) throws SQLException {
-
-        String query = "SELECT punkty FROM wyniki WHERE imie = ? ORDER BY idWyniku DESC LIMIT 1";
-        PreparedStatement stm = con.prepareStatement(query);
-        stm.setString(1,imie);
-        ResultSet result = stm.executeQuery();
-        result.next();
-       return result.getInt("punkty");
-    };
-
-    static public String selectQuestion(Connection con, int questionNumber) throws SQLException {
-        String query = "SELECT * FROM pytania WHERE numerPytania = ?";
-        PreparedStatement stm = con.prepareStatement(query);
-        stm.setInt(1,questionNumber);
-        ResultSet result = stm.executeQuery();
-        result.next();
-        String question = new String();
-        question += result.getInt("numerPytania");
-        question += ". ";
-        question += result.getString("pytanie");
-        question += System.lineSeparator()+"a) ";
-        question += result.getString("a");
-        question += System.lineSeparator()+"b) ";
-        question += result.getString("b");
-        question += System.lineSeparator()+"c) ";
-        question += result.getString("c");
-        question += System.lineSeparator()+"d) ";
-        question += result.getString("d");
-
-        return question;
-    };
 }
