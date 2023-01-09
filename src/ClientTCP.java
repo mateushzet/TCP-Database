@@ -41,7 +41,7 @@ public class ClientTCP {
 
                 while(( question = bf.readLine()) != null) {
 
-                    if(question.equals("timeError")){
+                    if(question.equals("timeoutError")){
                         if((question = bf.readLine())==null) question = " ";
                         System.out.println("Minal czas na odpowiedz");
                     }
