@@ -11,6 +11,7 @@ public class ServerTCP {
         String pwd = "password";
         Connection con = DriverManager.getConnection(url,user,pwd);
 
+        String name3;
         String[] tempArgs = new String[1];
         tempArgs[0] = "4999";
         final int MAX_CLIENT_CAPACITY = 250;

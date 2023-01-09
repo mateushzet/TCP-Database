@@ -14,6 +14,7 @@ public class ServerTCPThread extends Thread{
     int questionCount;
     Connection con;
     String name;
+    String name2;
 
     public ServerTCPThread(Socket socket, Connection con)
     {
