@@ -67,7 +67,7 @@ public class ServerTCPThread extends Thread{
                         punkty++;
                     }
                 }
-                    System.out.println(answer);
+                System.out.println(answer);
             }
             pw.println("Ilosc zdobytych punktow " + punkty +"/"+ questionCount + ", klikni enter aby zakonczyc");
             pw.flush();

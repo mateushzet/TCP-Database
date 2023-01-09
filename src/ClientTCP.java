@@ -11,6 +11,7 @@ public class ClientTCP {
         String[] tempArgs = new String[2];
         tempArgs[0] = "localhost";
         tempArgs[1] = "4999";
+
         Socket socket;
         if (tempArgs.length < 2)
             System.out.println("Wprowadz adres serwera TCP oraz numer portu");

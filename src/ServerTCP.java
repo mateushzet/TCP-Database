@@ -4,27 +4,27 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ServerTCP {
-        public static void main(String args[]) throws SQLException {
+    public static void main(String args[]) throws SQLException {
 
             String url = "jdbc:mariadb://localhost:3306/kolokwium";
             String user = "root";
             String pwd = "password";
             Connection con = DriverManager.getConnection(url,user,pwd);
 
-            String[] tempArgs = new String[1];
-            tempArgs[0] = "4999";
-            final int MAX_CLIENT_CAPACITY = 250;
+        String[] tempArgs = new String[1];
+        tempArgs[0] = "4999";
+        final int MAX_CLIENT_CAPACITY = 250;
 
-            if (tempArgs.length == 0)
-                System.out.println("Wprowadz numer portu, na ktorym" + "serwer bpdzie oczekiwai na klientOw");
-            else {
-                int port = 0;
-                try {
-                    port = Integer.parseInt(tempArgs[0]);
-                }catch (NumberFormatException e) {
-                    System.err.println("Wprowadz poprawny numer portu: " + e);
+        if (tempArgs.length == 0)
+            System.out.println("Wprowadz numer portu, na ktorym" + "serwer bpdzie oczekiwai na klientOw");
+        else {
+            int port = 0;
+            try {
+                port = Integer.parseInt(tempArgs[0]);
+            }catch (NumberFormatException e) {
+                System.err.println("Wprowadz poprawny numer portu: " + e);
                 return;
-                }
+            }
 
         try(ServerSocket serverSocket = new ServerSocket(port)) {
             int i = 0;
@@ -39,19 +39,19 @@ public class ServerTCP {
           }
 
 
-          }catch (Exception e)
+            }catch (Exception e)
             { System.err.println(e); }
         }
-}
+    }
 
     static public void initTables(Connection con) throws SQLException {
-            String tables [] = new String[4];
-           tables[0] = "Create table odpowiedzi_uczniów (idOdpowiedzi INT PRIMARY KEY AUTO_INCREMENT, imie varchar(30) NOT NULL, odpowiedz varchar(30), numerPytania INT(2) NOT NULL)";
-           tables[1] = "Create table pytania (numerPytania INT(2) PRIMARY KEY, pytanie varchar(100) NOT NULL, a varchar(100) NOT NULL, b varchar(100) NOT NULL, c varchar(100) NOT NULL, d varchar(100) NOT NULL)";
-           tables[2] = "Create table poprawne_odpowiedzi (numerPytania INT(2) PRIMARY KEY, odpowiedz varchar(30) NOT NULL)";
-           tables[3] = "Create table wyniki (idWyniku INT PRIMARY KEY AUTO_INCREMENT, imie varchar(30) NOT NULL, punkty INT(2) NOT NULL)";
+        String tables [] = new String[4];
+        tables[0] = "Create table odpowiedzi_uczniów (idOdpowiedzi INT PRIMARY KEY AUTO_INCREMENT, imie varchar(30) NOT NULL, odpowiedz varchar(30), numerPytania INT(2) NOT NULL)";
+        tables[1] = "Create table pytania (numerPytania INT(2) PRIMARY KEY, pytanie varchar(100) NOT NULL, a varchar(100) NOT NULL, b varchar(100) NOT NULL, c varchar(100) NOT NULL, d varchar(100) NOT NULL)";
+        tables[2] = "Create table poprawne_odpowiedzi (numerPytania INT(2) PRIMARY KEY, odpowiedz varchar(30) NOT NULL)";
+        tables[3] = "Create table wyniki (idWyniku INT PRIMARY KEY AUTO_INCREMENT, imie varchar(30) NOT NULL, punkty INT(2) NOT NULL)";
 
-            Statement stm = con.createStatement();
+        Statement stm = con.createStatement();
 
         for (int i = 0; i < 4; i++) {
             stm.executeUpdate(tables[i]);
@@ -68,10 +68,10 @@ public class ServerTCP {
             stm.executeUpdate(rows[i]);
         }
 
-         rows[0] = "INSERT INTO poprawne_odpowiedzi VALUES(1, 'c')";
-         rows[1] = "INSERT INTO poprawne_odpowiedzi VALUES(2, 'b')";
-         rows[2] = "INSERT INTO poprawne_odpowiedzi VALUES(3, 'c')";
-         rows[3] = "INSERT INTO poprawne_odpowiedzi VALUES(4, 'a')";
+        rows[0] = "INSERT INTO poprawne_odpowiedzi VALUES(1, 'c')";
+        rows[1] = "INSERT INTO poprawne_odpowiedzi VALUES(2, 'b')";
+        rows[2] = "INSERT INTO poprawne_odpowiedzi VALUES(3, 'c')";
+        rows[3] = "INSERT INTO poprawne_odpowiedzi VALUES(4, 'a')";
 
         for (int i = 0; i < 4; i++) {
             stm.executeUpdate(rows[i]);
